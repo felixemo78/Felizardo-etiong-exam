@@ -92,27 +92,6 @@ if (isset($channelInfo['items'][0])) {
         echo "No videos found for this channel.\n";
     }
 
-
-    if (isset($videos['items'])) {
-
-        foreach ($videos['items'] as $video) {
-            $videoTitle = $conn->real_escape_string($video['snippet']['title']);
-            $videoDescription = $conn->real_escape_string($video['snippet']['description']);
-            $videoId = $conn->real_escape_string($video['id']);
-            $videoThumbnail = $conn->real_escape_string($video['snippet']['thumbnails']['default']['url']);
-
-            $sql = "INSERT INTO youtube_channel_videos (id,_videoLink, _title, _description, _thumbnail) VALUES ('','$videoId', '$videoTitle', '$videoDescription', '$videoThumbnail')";
-
-            if ($conn->query($sql) === true) {
-                echo "Video information saved to the database.\n";
-
-            } else {
-                echo "Error saving video information: " . $conn->error . "\n";
-            }
-        }
-    } else {
-        echo "No videos found for this channel.\n";
-    }
 } else {
     echo "Channel not found.\n";
 }
