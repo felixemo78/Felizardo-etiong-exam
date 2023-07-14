@@ -10,15 +10,15 @@ export default {
     };
   },
   computed: {
-  displayedVideos() {
-    const startIndex = (this.currentPage - 1) * this.videosPerPage;
-    const endIndex = startIndex + this.videosPerPage;
-    return this.jsonData.slice(startIndex, endIndex);
+    displayedVideos() {
+      const startIndex = (this.currentPage - 1) * this.videosPerPage;
+      const endIndex = startIndex + this.videosPerPage;
+      return this.jsonData.slice(startIndex, endIndex);
+    },
+    totalPages() {
+      return Math.ceil(this.jsonData.length / this.videosPerPage);
+    },
   },
-  totalPages() {
-    return Math.ceil(this.jsonData.length / this.videosPerPage);
-  },
-},
   mounted() {
     this.fetchData();
   },
@@ -58,37 +58,42 @@ export default {
     </div>
   </div>
   <div class="videos-container">
-    <div v-for="data in displayedVideos" 
-    :key="data.id" 
-    class="video-card">
+    <div v-for="data in displayedVideos" :key="data.id" class="video-card">
       <div class="thumbnail">
         <a
           :href="`https://www.youtube.com/watch?v=${data._videoLink}`"
-          target="_blank">
-          <img :src="data._thumbnail" alt="Thumbnail"
-        />
-      </a>
+          target="_blank"
+        >
+          <img :src="data._thumbnail" alt="Thumbnail" />
+        </a>
       </div>
       <div class="video-details">
         <h2 class="title" v-text="data._title"></h2>
-        <p class="description" :class="{ 'hide': !data.showDescription }">{{ data._description }}</p>
+        <p class="description" :class="{ hide: !data.showDescription }">
+          {{ data._description }}
+        </p>
         <button class="toggle-description" @click="toggleDescription(data)">
-          {{ data.showDescription ? 'Show Less' : 'Show More' }}
+          {{ data.showDescription ? "Show Less" : "Show More" }}
         </button>
       </div>
     </div>
   </div>
   <div class="pagination">
-    <button @click="previousPage" :disabled="currentPage === 1">Previous</button>
-  <button
-    v-for="page in totalPages"
-    :key="page"
-    :class="{ active: currentPage === page }"
-    @click="currentPage = page">
-    {{ page }}
-  </button>
-  <button @click="nextPage" :disabled="currentPage === totalPages">Next</button>
-</div>
+    <button @click="previousPage" :disabled="currentPage === 1">
+      Previous
+    </button>
+    <button
+      v-for="page in totalPages"
+      :key="page"
+      :class="{ active: currentPage === page }"
+      @click="currentPage = page"
+    >
+      {{ page }}
+    </button>
+    <button @click="nextPage" :disabled="currentPage === totalPages">
+      Next
+    </button>
+  </div>
 </template>
 
 <style scoped>
@@ -162,7 +167,7 @@ export default {
   opacity: 0.5;
   cursor: not-allowed;
 }
-.pagination button:hover{
+.pagination button:hover {
   background-color: #666;
 }
 </style>

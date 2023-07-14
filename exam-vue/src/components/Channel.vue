@@ -16,7 +16,6 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           this.jsonData = data.youtube_channels;
-          
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -75,6 +74,7 @@ h1 {
   .profile {
     width: 150px;
     height: 50px;
+    display: none;
   }
 }
 
