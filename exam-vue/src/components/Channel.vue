@@ -46,6 +46,7 @@ h1 {
 .container {
   display: flex;
   align-items: center;
+  overflow: hidden;
 }
 .content {
   display: flex;
