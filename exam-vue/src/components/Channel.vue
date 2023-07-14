@@ -12,7 +12,7 @@ export default {
   },
   methods: {
     fetchData() {
-      fetch("http://localhost/exam/exam-vue/src/components/youtube_channel_json.php")
+      fetch("http://localhost/exam/exam-vue/src/youtube_channel_json.php")
         .then((response) => response.json())
         .then((data) => {
           this.jsonData = data.youtube_channels;
